@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GPTToolkit - AI Tools Directory</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header, footer {
+      background-color: #1f1f1f;
+      padding: 1em;
+      text-align: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    nav a {
+      color: #fff;
+      margin: 0 1em;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 2em;
+      max-width: 900px;
+      margin: auto;
+    }
+    input, textarea, button {
+      display: block;
+      margin: 1em 0;
+      padding: 0.5em;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 4px;
+      border: none;
+      background-color: #2a2a2a;
+      color: #fff;
+      resize: vertical;
+    }
+    button {
+      background-color: #3b82f6;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2563eb;
+    }
+    ul.tool-list, #tools-list {
+      list-style: none;
+      padding: 0;
+    }
+    ul.tool-list li, #tools-list li {
+      background: #1e1e1e;
+      margin: 0.5em 0;
+      padding: 1em;
+      border-radius: 5px;
+    }
+    section {
+      margin-bottom: 3em;
+    }
+    /* Hide all sections by default except home */
+    section.page {
+      display: none;
+    }
+    section.page.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>GPTToolkit</h1>
+    <nav>
+      <a data-page="home">Home</a>
+      <a data-page="tools">Tools</a>
+      <a data-page="submit">Submit Tool</a>
+      <a data-page="about">About</a>
+      <a data-page="contact">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <!-- Home Section -->
+    <section id="home" class="page active">
+      <section class="intro">
+        <h2>Explore the Latest AI Tools</h2>
+        <p>Hand-picked tools for writing, coding, images, and more.</p>
+        <form id="subscribe-form" action="#" method="POST">
+          <input type="email" placeholder="Your email" required />
+          <button type="submit">Subscribe</button>
+        </form>
+      </section>
+      <section class="featured">
+        <h3>Featured Tools</h3>
+        <ul class="tool-list">
+          <li><strong>WriteWise</strong> – AI-powered writing assistant</li>
+          <li><strong>PixelGenie</strong> – Generate stunning AI images</li>
+          <li><strong>CodeWhiz</strong> – Autocomplete your code with AI</li>
+        </ul>
+      </section>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="page">
+      <h2>All AI Tools</h2>
+      <input type="text" id="search" placeholder="Search tools..." />
+      <ul id="tools-list">
+        <li data-category="writing">WriteWise - Writing Assistant</li>
+        <li data-category="image">PixelGenie - Image Generator</li>
+        <li data-category="code">CodeWhiz - Code Completion</li>
+        <li data-category="audio">VoiceBot - AI Voice Generator</li>
+        <li data-category="chatbot">SmartChat - Customer Support Bot</li>
+        <li data-category="productivity">FocusAI - Task Automation</li>
+        <li data-category="video">VidCraft - AI Video Editor</li>
+      </ul>
+    </section>
+
+    <!-- Submit Tool Section -->
+    <section id="submit" class="page">
+      <h2>Submit Your AI Tool</h2>
+      <form id="submit-tool-form">
+        <input type="text" placeholder="Tool Name" required />
+        <input type="url" placeholder="Tool URL" required />
+        <textarea placeholder="Tool Description" required></textarea>
+        <button type="submit">Submit</button>
+      </form>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="page">
+      <h2>About Us</h2>
+      <p>GPTToolkit is your curated hub for discovering the best AI tools available. We feature tools across categories like writing, coding, image generation, voice, video, and more.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="page">
+      <h2>Contact Us</h2>
+      <p>Email: hello@gpttoolkit.ai</p>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2025 GPTToolkit</p>
+  </footer>
+
+  <script>
+    // Navigation logic: show/hide sections
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', e => {
+        const page = e.target.getAttribute('data-page');
+        document.querySelectorAll('section.page').forEach(section => {
+          section.classList.remove('active');
+        });
+        const activeSection = document.getElementById(page);
+        if(activeSection) activeSection.classList.add('active');
+      });
+    });
+
+    // Search filter on Tools page
+    const searchInput = document.getElementById('search');
+    const toolsList = document.getElementById('tools-list');
+    if(searchInput && toolsList) {
+      searchInput.addEventListener('input', () => {
+        const term = searchInput.value.toLowerCase();
+        toolsList.querySelectorAll('li').forEach(tool => {
+          tool.style.display = tool.textContent.toLowerCase().includes(term) ? 'block' : 'none';
+        });
+      });
+    }
+
+    // Form submit handlers (basic)
+    document.getElementById('subscribe-form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Thank you for subscribing!');
+      e.target.reset();
+    });
+
+    document.getElementById('submit-tool-form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Thank you for submitting your tool! We will review it soon.');
+      e.target.reset();
+    });
+  </script>
+</body>
+</html>
